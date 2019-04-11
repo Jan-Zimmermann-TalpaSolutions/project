@@ -30,7 +30,7 @@ public class View {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-
+    //enthält keine Logik
 }
 
 

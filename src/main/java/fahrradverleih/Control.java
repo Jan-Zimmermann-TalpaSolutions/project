@@ -20,4 +20,5 @@ public class Control {
     }
     //ActionListener eigentlich auch im Control
     //mein Exceptions auch
+    //Vermittlungsschicht zwischen Daten und View
 }
