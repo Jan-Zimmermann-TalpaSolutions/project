@@ -9,6 +9,9 @@
   -fx-background-insets: 0;
   -fx-text-fill: white;
 }
+.button:hover{
+  -fx-background-color: linear-gradient(#EB4D09, #870303);
+}
 
 .label{
   -fx-text-fill: white;

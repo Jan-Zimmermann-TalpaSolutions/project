@@ -9,6 +9,9 @@
   -fx-background-insets: 0;
   -fx-text-fill: white;
 }
+.button:hover{
+  -fx-background-color: linear-gradient(#EB4D09, #870303);
+}
 
 .label{
   -fx-text-fill: white;
@@ -21,9 +24,6 @@
 .table-view:focused{
   -fx-background-color: transparent;
 }
-
-/* Spaltenköpfe
-    Struktur column-header-background -> column-header */
 
 .table-view .column-header-background{
   -fx-background-color: linear-gradient(#ff5400, #be1d00);
@@ -64,8 +64,6 @@
 .table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
   -fx-background-color: transparent;
 }
-
-
 
 .table-view > .virtual-flow > .scroll-bar > .increment-button,
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {
