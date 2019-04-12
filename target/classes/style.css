@@ -17,16 +17,14 @@
   -fx-text-fill: white;
 }
 
+
 .table-view{
-  -fx-background-color: white;
+  -fx-background-color: transparent;
 }
 
 .table-view:focused{
   -fx-background-color: transparent;
 }
-
-/* Spaltenköpfe
-    Struktur column-header-background -> column-header */
 
 .table-view .column-header-background{
   -fx-background-color: linear-gradient(#ff5400, #be1d00);
@@ -59,6 +57,10 @@
   -fx-background-radius: 1;
 }
 
+.table-row-cell:hover{
+  -fx-background-color: lightblue;
+}
+
 .table-view > .virtual-flow > .scroll-bar:vertical,
 .table-view > .virtual-flow > .scroll-bar:vertical > .track,
 .table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
@@ -67,8 +69,6 @@
 .table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
   -fx-background-color: transparent;
 }
-
-
 
 .table-view > .virtual-flow > .scroll-bar > .increment-button,
 .table-view > .virtual-flow > .scroll-bar > .decrement-button {

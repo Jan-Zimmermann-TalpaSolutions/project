@@ -17,8 +17,9 @@
   -fx-text-fill: white;
 }
 
+
 .table-view{
-  -fx-background-color: white;
+  -fx-background-color: transparent;
 }
 
 .table-view:focused{
@@ -54,6 +55,10 @@
   -fx-background-color: blue;
   -fx-background-insets: 0;
   -fx-background-radius: 1;
+}
+
+.table-row-cell:hover{
+  -fx-background-color: lightblue;
 }
 
 .table-view > .virtual-flow > .scroll-bar:vertical,
