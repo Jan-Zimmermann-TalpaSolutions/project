@@ -1,13 +1,18 @@
 package fahrradverleih;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class View {
+
+    @FXML
+    private TextField tage;
 
     private Model model;
     private Control control;
@@ -24,8 +29,9 @@ public class View {
 
     }
 
-    public void showScene(Stage primaryStage)throws IOException { //allgemeiner schreib so das Resource,Title übergeben wird
+    public void showScene(Stage primaryStage)throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fahrradVerleih.fxml"));
+        tage.setText("LOL");
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
