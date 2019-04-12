@@ -86,7 +86,7 @@
       <VBox layoutX="433.0" layoutY="363.0" spacing="15.0">
          <children>
             <Button fx:id="berechnen" mnemonicParsing="false" prefHeight="27.0" prefWidth="192.0" text="Berechnen" />
-            <TextField fx:id="preis" />
+            <TextField fx:id="preis"  />
             <Button fx:id="bestellen" mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" text="Bestellen" />
          </children>
       </VBox>

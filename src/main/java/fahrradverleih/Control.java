@@ -21,6 +21,7 @@ public class Control implements Initializable {
     private Model model;
     private View view;
     private Stage stage;
+    private String currentWarenkorb;
 
     @FXML
     private TextField tage;
@@ -54,61 +55,14 @@ public class Control implements Initializable {
         try{
             this.view = new View(this.model, this, this.stage);
         } catch(IOException e){
-
+            e.printStackTrace();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.berechnen.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ObservableList<Fahrrad> items = warenkorb.getItems();
-                try{
-                    int tageWert = Integer.parseInt(tage.getText());
-                    if(items != null){
-                        double erg = 0;
-                        for (Fahrrad item:items) {
-                            erg += item.getPreis();
-                        }
-                        erg *= tageWert;
-                        preis.setText("" + erg);
-                    }
-                }catch(NumberFormatException e){
-                    //Label einfügen und das dann mit Text füllen
-                }
-
-
-            }
-        });
-        this.bestellen.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-            }
-        });
-        this.hinzufuegen.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-               Fahrrad item =  vorrat.getSelectionModel().getSelectedItem();
-               if(item != null){
-                   warenkorb.getItems().add(item);
-                   vorrat.getItems().remove(item);
-               }
-            }
-        });
-        this.loeschen.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Fahrrad item =  warenkorb.getSelectionModel().getSelectedItem();
-                if(item != null){
-                    vorrat.getItems().add(item);
-                    warenkorb.getItems().remove(item);
-                }
-            }
-        });
+        initEventListener();
         initTableColumn();
-
     }
 
     private void initTableColumn(){
@@ -128,4 +82,67 @@ public class Control implements Initializable {
             new Fahrrad("BMX", 13.2),
             new Fahrrad("Roller", 5.6)
             );
+
+    private void changeTable(TableView<Fahrrad> from, TableView<Fahrrad> to){
+        Fahrrad item =  from.getSelectionModel().getSelectedItem();
+        if(item != null){
+            to.getItems().add(item);
+            from.getItems().remove(item);
+        }
+    }
+    private void showMessageDialog(Alert.AlertType type, String title, String header, String content){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.show();
+    }
+
+    private void initEventListener(){
+        this.berechnen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                ObservableList<Fahrrad> items = warenkorb.getItems();
+                currentWarenkorb = "";
+                try{
+                    int tageWert = Integer.parseInt(tage.getText());
+                    currentWarenkorb += "Anzahl Tage:" + tageWert + "\n";
+                    if(items != null){
+                        double erg = 0;
+                        for (Fahrrad item:items) {
+                            erg += item.getPreis();
+                            currentWarenkorb += item.getName() + " " + item.getPreis() + "\n";
+                        }
+                        erg *= tageWert;
+                        preis.setText("" + erg); //currentWarnkorb zwischen speichern
+                    }
+                }catch(NumberFormatException e){
+                    showMessageDialog(Alert.AlertType.ERROR, "Fehler", "Fehler", "Fehler");
+                    //präsizieren
+                    //Label einfügen und das dann mit Text füllen
+                }
+
+
+            }
+        });
+        this.bestellen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                showMessageDialog(Alert.AlertType.INFORMATION, "Bestellung", "Informationen zu ihrer Bestellung", currentWarenkorb);
+                //messageBox sie haben erfolgreich bestellt/ Liste der Bestellung
+            }
+        });
+        this.hinzufuegen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                changeTable(vorrat, warenkorb);
+            }
+        });
+        this.loeschen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                changeTable(warenkorb, vorrat);
+            }
+        });
+    }
 }
