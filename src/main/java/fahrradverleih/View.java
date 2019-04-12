@@ -20,17 +20,16 @@ public class View {
         showScene(primaryStage);
     }
 
-    public void initComponents() {
-
-    }
-
     public void showScene(Stage primaryStage)throws IOException { //allgemeiner schreib so das Resource,Title übergeben wird
-        Parent root = FXMLLoader.load(getClass().getResource("/fahrradVerleih.fxml"));
-        primaryStage.setTitle("Hello World");
+        //Parent root = FXMLLoader.load(getClass().getResource("/fahrradVerleih.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fahrradVerleih.fxml"));
+        fxmlLoader.setController(this.control);
+        Parent root = fxmlLoader.load();
+        primaryStage.setTitle("Fahrradverleih");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-    //enthält keine Logik
+
 }
 
 
